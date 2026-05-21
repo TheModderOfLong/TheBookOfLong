@@ -18,7 +18,7 @@ internal sealed class CsvPatchFile
     public int LoadOrder { get; set; }
 
     // CSV 主键列里真正定义出来的 modXXX 符号 ID。
-    // 其他系统只能引用这里定义过的 ID；分配顺序也以这里的主键排序为准。
+    // 其他系统只能引用这里定义过的 ID；分配顺序也以这里的主键出现顺序为准。
     public List<string> OrderedPrimarySymbolicIds { get; set; } = new();
 
     // 当前 patch 文件里出现过的全部 modXXX。

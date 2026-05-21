@@ -6,7 +6,7 @@ namespace TheBookOfLong;
 /// 一个 mod 文件夹在运行时的统一视图。
 /// 其他补丁系统只依赖这个接口拿元数据和补丁文件列表，不再自己重复扫描目录。
 /// </summary>
-internal interface IModProject
+public interface IModProject
 {
     string FolderName { get; }
 

@@ -112,7 +112,7 @@ internal static class ComplexSymbolicFieldRules
                 return numericId;
             }
 
-            if (SymbolicIdService.TryResolveIdForSource(GameComplexDataPatchManager.PlotDataSourcePath, rawValue, out int assignedId))
+            if (SymbolicIdService.TryResolveId(rawValue, out int assignedId))
             {
                 return assignedId;
             }
@@ -126,7 +126,7 @@ internal static class ComplexSymbolicFieldRules
 
     private static string? ResolveDelimitedSymbolicId(string symbolicId, ComplexJsonPatchFile patchFile, string jsonPath, string memberName)
     {
-        if (!SymbolicIdService.TryResolveIdForSource(GameComplexDataPatchManager.PlotDataSourcePath, symbolicId, out int assignedId))
+        if (!SymbolicIdService.TryResolveId(symbolicId, out int assignedId))
         {
             throw new InvalidOperationException(
                 $"Could not resolve symbolic ID '{symbolicId}' for '{memberName}' referenced by '{patchFile.FullPath}' at '{jsonPath}'.");

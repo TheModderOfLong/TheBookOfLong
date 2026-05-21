@@ -2,7 +2,7 @@ using System;
 using HarmonyLib;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(TheBookOfLong.MainMod), "TheBookOfLong", "1.2.0", "skysw")]
+[assembly: MelonInfo(typeof(TheBookOfLong.MainMod), "TheBookOfLong", "1.3.0", "skysw")]
 [assembly: MelonGame("TppStudio", "LongYinLiZhiZhuan")]
 
 namespace TheBookOfLong;

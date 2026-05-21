@@ -11,7 +11,7 @@ namespace TheBookOfLong;
 /// 统一扫描 ModsOfLong，并把每个 mod 文件夹整理成 IModProject。
 /// 后续 CSV、ComplexData 等补丁系统都只从这里取项目数据。
 /// </summary>
-internal static class ModProjectRegistry
+public static class ModProjectRegistry
 {
     private static readonly object Sync = new();
     private static readonly UTF8Encoding Utf8NoBom = new(encoderShouldEmitUTF8Identifier: false);
@@ -28,13 +28,13 @@ internal static class ModProjectRegistry
     private static string _modsOfLongRoot = string.Empty;
     private static bool _isInitialized;
 
-    internal static string GameRoot => _gameRoot;
+    public static string GameRoot => _gameRoot;
 
-    internal static string ModsRoot => _modsRoot;
+    public static string ModsRoot => _modsRoot;
 
-    internal static string ModsOfLongRoot => _modsOfLongRoot;
+    public static string ModsOfLongRoot => _modsOfLongRoot;
 
-    internal static bool Initialize()
+    public static bool Initialize()
     {
         lock (Sync)
         {
@@ -54,7 +54,7 @@ internal static class ModProjectRegistry
         }
     }
 
-    internal static IReadOnlyList<IModProject> GetEnabledProjectsSnapshot()
+    public static IReadOnlyList<IModProject> GetEnabledProjectsSnapshot()
     {
         lock (Sync)
         {

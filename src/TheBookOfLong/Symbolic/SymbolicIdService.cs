@@ -10,7 +10,7 @@ namespace TheBookOfLong;
 /// 负责管理 modXXX 这类符号 ID。
 /// 规则上以 CSV 主键里的定义为准，ComplexData 等其他位置只引用已经定义好的结果。
 /// </summary>
-internal static class SymbolicIdService
+public static class SymbolicIdService
 {
     private const string PlotDataSourcePath = "GameData/PlotData.csv";
     private const string PlotDataFunctionColumnName = "调用函数";
@@ -20,6 +20,7 @@ internal static class SymbolicIdService
     private static readonly UTF8Encoding Utf8NoBom = new(encoderShouldEmitUTF8Identifier: false);
     private static readonly Dictionary<string, SymbolicSourceInfo> SymbolicSourcesBySourcePath = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, SymbolicIdGroup> SymbolicGroupsBySourcePath = new(StringComparer.OrdinalIgnoreCase);
+    private static readonly Dictionary<string, int> AssignedIdsBySymbolicId = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, HashSet<string>> ExternalSymbolicIdsBySourcePath = new(StringComparer.OrdinalIgnoreCase);
 
     private static string _gameRoot = string.Empty;
@@ -31,11 +32,12 @@ internal static class SymbolicIdService
             _gameRoot = gameRoot;
             SymbolicSourcesBySourcePath.Clear();
             SymbolicGroupsBySourcePath.Clear();
+            AssignedIdsBySymbolicId.Clear();
             ExternalSymbolicIdsBySourcePath.Clear();
         }
     }
 
-    internal static void RegisterExternalReference(
+    public static void RegisterExternalReference(
         string sourcePath,
         string symbolicValue,
         string modName,
@@ -69,7 +71,7 @@ internal static class SymbolicIdService
             referenceType);
     }
 
-    internal static bool TryResolveIdForSource(string sourcePath, string symbolicValue, out int assignedId)
+    public static bool TryResolveIdForSource(string sourcePath, string symbolicValue, out int assignedId)
     {
         assignedId = 0;
         if (!TryGetSymbolicId(symbolicValue, out string symbolicId))
@@ -85,7 +87,21 @@ internal static class SymbolicIdService
         }
     }
 
-    internal static bool TryGetSourceResolution(string sourcePath, out SymbolicSourceResolution resolution)
+    public static bool TryResolveId(string symbolicValue, out int assignedId)
+    {
+        assignedId = 0;
+        if (!TryGetSymbolicId(symbolicValue, out string symbolicId))
+        {
+            return false;
+        }
+
+        lock (Sync)
+        {
+            return AssignedIdsBySymbolicId.TryGetValue(symbolicId, out assignedId);
+        }
+    }
+
+    public static bool TryGetSourceResolution(string sourcePath, out SymbolicSourceResolution resolution)
     {
         string canonicalSourcePath = BuildCanonicalSourcePath(sourcePath);
         lock (Sync)
@@ -123,7 +139,6 @@ internal static class SymbolicIdService
             }
         }
 
-        orderedSymbolicIds.Sort(StringComparer.OrdinalIgnoreCase);
         return orderedSymbolicIds;
     }
 
@@ -177,6 +192,7 @@ internal static class SymbolicIdService
                         KeyColumnIndex = patchFile.KeyColumnIndex
                     };
 
+                    sourceInfo.DiscoveryOrder = symbolicSources.Count;
                     symbolicSources[sourceInfo.SourcePath] = sourceInfo;
                 }
                 else if (sourceInfo.KeyColumnIndex != patchFile.KeyColumnIndex)
@@ -185,10 +201,14 @@ internal static class SymbolicIdService
                         $"Data patch '{patchFile.FullPath}' uses key column {patchFile.KeyColumnIndex}, but other patches for '{patchFile.SourcePath}' use key column {sourceInfo.KeyColumnIndex}. The first detected key column will be used for string ID resolution.");
                 }
 
-                sourceInfo.PrimarySymbolicIds.UnionWith(patchFile.OrderedPrimarySymbolicIds);
+                AddOrderedSymbolicIds(
+                    sourceInfo.OrderedPrimarySymbolicIds,
+                    sourceInfo.PrimarySymbolicIds,
+                    patchFile.OrderedPrimarySymbolicIds);
                 sourceInfo.ReferencedSymbolicIds.UnionWith(patchFile.SymbolicIds);
             }
 
+            WarnDuplicatePrimarySymbolicIds(csvPatchFiles);
             MergeExternalSymbolicSources(symbolicSources);
 
             if (symbolicSources.Count == 0)
@@ -230,7 +250,7 @@ internal static class SymbolicIdService
         }
     }
 
-    internal static bool TryGetSymbolicId(string? value, out string symbolicId)
+    public static bool TryGetSymbolicId(string? value, out string symbolicId)
     {
         string trimmed = value?.Trim() ?? string.Empty;
         if (trimmed.Length > 3 && trimmed.StartsWith("mod", StringComparison.OrdinalIgnoreCase))
@@ -243,7 +263,7 @@ internal static class SymbolicIdService
         return false;
     }
 
-    internal static string BuildCanonicalSourcePath(string path)
+    public static string BuildCanonicalSourcePath(string path)
     {
         string normalizedPath = NormalizePath(path);
         if (string.IsNullOrWhiteSpace(normalizedPath))
@@ -273,7 +293,8 @@ internal static class SymbolicIdService
                 sourceInfo = new SymbolicSourceInfo
                 {
                     SourcePath = sourcePath,
-                    KeyColumnIndex = -1
+                    KeyColumnIndex = -1,
+                    DiscoveryOrder = symbolicSources.Count
                 };
 
                 symbolicSources[sourcePath] = sourceInfo;
@@ -364,7 +385,6 @@ internal static class SymbolicIdService
             {
                 string currentSourcePath = pending.Dequeue();
                 group.SourcePaths.Add(currentSourcePath);
-                group.PrimarySymbolicIds.UnionWith(symbolicSources[currentSourcePath].PrimarySymbolicIds);
                 group.ReferencedSymbolicIds.UnionWith(symbolicSources[currentSourcePath].ReferencedSymbolicIds);
 
                 foreach (string neighbor in neighborsBySourcePath[currentSourcePath])
@@ -376,6 +396,7 @@ internal static class SymbolicIdService
                 }
             }
 
+            AddOrderedPrimaryIdsForGroup(group, symbolicSources);
             groups.Add(group);
         }
 
@@ -384,8 +405,7 @@ internal static class SymbolicIdService
 
     private static void ResolveSymbolicIdGroup(SymbolicIdGroup group, Dictionary<string, SymbolicSourceInfo> symbolicSources)
     {
-        List<string> orderedPrimarySymbolicIds = new(group.PrimarySymbolicIds);
-        orderedPrimarySymbolicIds.Sort(StringComparer.OrdinalIgnoreCase);
+        List<string> orderedPrimarySymbolicIds = new(group.OrderedPrimarySymbolicIds);
 
         List<string> orderedReferenceOnlySymbolicIds = new(group.ReferencedSymbolicIds);
         orderedReferenceOnlySymbolicIds.RemoveAll(symbolicId => group.PrimarySymbolicIds.Contains(symbolicId));
@@ -445,6 +465,7 @@ internal static class SymbolicIdService
         {
             string symbolicId = group.OrderedSymbolicIds[i];
             group.AssignedIds[symbolicId] = nextId;
+            AssignedIdsBySymbolicId[symbolicId] = nextId;
             nextId += 1;
         }
 
@@ -453,6 +474,99 @@ internal static class SymbolicIdService
         foreach (string sourcePath in group.SourcePaths)
         {
             SymbolicGroupsBySourcePath[sourcePath] = group;
+        }
+    }
+
+    private static void WarnDuplicatePrimarySymbolicIds(List<CsvPatchFile> csvPatchFiles)
+    {
+        Dictionary<string, List<CsvPatchFile>> primaryDefinitionsBySymbolicId = new(StringComparer.OrdinalIgnoreCase);
+        for (int i = 0; i < csvPatchFiles.Count; i += 1)
+        {
+            CsvPatchFile patchFile = csvPatchFiles[i];
+            for (int symbolicIndex = 0; symbolicIndex < patchFile.OrderedPrimarySymbolicIds.Count; symbolicIndex += 1)
+            {
+                string symbolicId = patchFile.OrderedPrimarySymbolicIds[symbolicIndex];
+                if (!primaryDefinitionsBySymbolicId.TryGetValue(symbolicId, out List<CsvPatchFile>? definitions))
+                {
+                    definitions = new List<CsvPatchFile>();
+                    primaryDefinitionsBySymbolicId[symbolicId] = definitions;
+                }
+
+                bool alreadyDefinedByThisFile = false;
+                for (int definitionIndex = 0; definitionIndex < definitions.Count; definitionIndex += 1)
+                {
+                    if (string.Equals(definitions[definitionIndex].FullPath, patchFile.FullPath, StringComparison.OrdinalIgnoreCase))
+                    {
+                        alreadyDefinedByThisFile = true;
+                        break;
+                    }
+                }
+
+                if (!alreadyDefinedByThisFile)
+                {
+                    definitions.Add(patchFile);
+                }
+            }
+        }
+
+        foreach ((string symbolicId, List<CsvPatchFile> definitions) in primaryDefinitionsBySymbolicId)
+        {
+            if (definitions.Count < 2)
+            {
+                continue;
+            }
+
+            List<string> locations = new(definitions.Count);
+            for (int i = 0; i < definitions.Count; i += 1)
+            {
+                CsvPatchFile definition = definitions[i];
+                locations.Add($"{definition.ModName}:{definition.RelativePath}");
+            }
+
+            MelonLogger.Warning(
+                $"String ID '{symbolicId}' is defined as a CSV primary key in multiple patch files: {string.Join(", ", locations)}. Non-primary references are allowed, but duplicate primary definitions may indicate a mod conflict.");
+        }
+    }
+
+    private static void AddOrderedPrimaryIdsForGroup(
+        SymbolicIdGroup group,
+        Dictionary<string, SymbolicSourceInfo> symbolicSources)
+    {
+        List<SymbolicSourceInfo> orderedSourceInfos = new(group.SourcePaths.Count);
+        foreach (string sourcePath in group.SourcePaths)
+        {
+            orderedSourceInfos.Add(symbolicSources[sourcePath]);
+        }
+
+        orderedSourceInfos.Sort(static (left, right) =>
+        {
+            int compare = left.DiscoveryOrder.CompareTo(right.DiscoveryOrder);
+            return compare != 0
+                ? compare
+                : string.Compare(left.SourcePath, right.SourcePath, StringComparison.OrdinalIgnoreCase);
+        });
+
+        for (int i = 0; i < orderedSourceInfos.Count; i += 1)
+        {
+            SymbolicSourceInfo sourceInfo = orderedSourceInfos[i];
+            AddOrderedSymbolicIds(
+                group.OrderedPrimarySymbolicIds,
+                group.PrimarySymbolicIds,
+                sourceInfo.OrderedPrimarySymbolicIds);
+        }
+    }
+
+    private static void AddOrderedSymbolicIds(
+        List<string> orderedSymbolicIds,
+        HashSet<string> seenSymbolicIds,
+        IEnumerable<string> symbolicIds)
+    {
+        foreach (string symbolicId in symbolicIds)
+        {
+            if (seenSymbolicIds.Add(symbolicId))
+            {
+                orderedSymbolicIds.Add(symbolicId);
+            }
         }
     }
 
@@ -718,6 +832,8 @@ internal static class SymbolicIdService
     {
         public string SourcePath { get; set; } = string.Empty;
 
+        public int DiscoveryOrder { get; set; }
+
         public int KeyColumnIndex { get; set; } = -1;
 
         public bool HasBaseMaxId { get; set; }
@@ -725,6 +841,8 @@ internal static class SymbolicIdService
         public int BaseMaxId { get; set; }
 
         public HashSet<string> PrimarySymbolicIds { get; } = new(StringComparer.OrdinalIgnoreCase);
+
+        public List<string> OrderedPrimarySymbolicIds { get; } = new();
 
         public HashSet<string> ReferencedSymbolicIds { get; } = new(StringComparer.OrdinalIgnoreCase);
     }
@@ -734,6 +852,8 @@ internal static class SymbolicIdService
         public HashSet<string> SourcePaths { get; } = new(StringComparer.OrdinalIgnoreCase);
 
         public HashSet<string> PrimarySymbolicIds { get; } = new(StringComparer.OrdinalIgnoreCase);
+
+        public List<string> OrderedPrimarySymbolicIds { get; } = new();
 
         public HashSet<string> ReferencedSymbolicIds { get; } = new(StringComparer.OrdinalIgnoreCase);
 

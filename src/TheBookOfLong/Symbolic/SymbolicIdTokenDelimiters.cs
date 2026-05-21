@@ -19,7 +19,7 @@ public static class SymbolicIdTokenDelimiters
         ':'
     };
 
-    internal static bool IsDelimiter(char ch)
+    public static bool IsDelimiter(char ch)
     {
         for (int i = 0; i < TokenDelimiters.Count; i += 1)
         {
