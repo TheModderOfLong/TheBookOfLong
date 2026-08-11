@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{105B50ED-A457-4367-A64C-6604772339A2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TheExtensionOfLong</RootNamespace>
+    <AssemblyName>TheExtensionOfLong</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>$(LongYinMelonNet6Dir)\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="AsmResolver, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\AsmResolver.dll</HintPath>
+    </Reference>
+    <Reference Include="AsmResolver.DotNet, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\AsmResolver.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="AsmResolver.PE, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\AsmResolver.PE.dll</HintPath>
+    </Reference>
+    <Reference Include="AsmResolver.PE.File, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\AsmResolver.PE.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(LongYinGameAssembliesDir)\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>$(LongYinGameAssembliesDir)\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="AssetRipper.Primitives, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\AssetRipper.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="AssetsTools.NET, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\AssetsTools.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="bHapticsLib, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\bHapticsLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Iced, Version=1.21.0.0, Culture=neutral, PublicKeyToken=5baba79f4264913b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\Iced.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppCISUnityCore">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppCISUnityCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppcom.cis.authsdk">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2Cppcom.cis.authsdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppcom.cis.filterwords">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2Cppcom.cis.filterwords.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppcom.rlabrecque.steamworks.net">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2Cppcom.rlabrecque.steamworks.net.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppDOTween">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppDOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Common, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\Il2CppInterop.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Generator, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\Il2CppInterop.Generator.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.HarmonySupport, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\Il2CppInterop.HarmonySupport.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>$(LongYinMelonNet6Dir)\Il2CppInterop.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppMono.Security">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppMono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2Cppmscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppNewtonsoft.Json">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppNewtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppspine-csharp">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2Cppspine-csharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppspine-unity">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2Cppspine-unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppspine-unity-examples">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2Cppspine-unity-examples.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Configuration">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppSystem.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Core">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppSystem.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Data">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppSystem.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Numerics">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppSystem.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Runtime.Serialization">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Xml">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppSystem.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Xml.Linq">
+      <HintPath>$(LongYinGameAssembliesDir)\Il2CppSystem.Xml.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="IndexRange">
+      <HintPath>$(LongYinMelonNet6Dir)\IndexRange.dll</HintPath>
+    </Reference>
+    <Reference Include="MelonLoader">
+      <HintPath>$(LongYinMelonNet6Dir)\MelonLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="MelonLoader.NativeHost">
+      <HintPath>$(LongYinMelonNet6Dir)\MelonLoader.NativeHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.Memory">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Bcl.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Diagnostics.NETCore.Client">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Diagnostics.NETCore.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Diagnostics.Runtime, Version=3.1.10.12801, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Diagnostics.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives">
+      <HintPath>$(LongYinMelonNet6Dir)\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod">
+      <HintPath>$(LongYinMelonNet6Dir)\MonoMod.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Backports, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\MonoMod.Backports.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.ILHelpers, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\MonoMod.ILHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour, Version=22.7.31.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\MonoMod.RuntimeDetour.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils, Version=22.7.31.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\MonoMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.ConfigurationManager">
+      <HintPath>$(LongYinMelonNet6Dir)\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>$(LongYinMelonNet6Dir)\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData">
+      <HintPath>$(LongYinMelonNet6Dir)\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions">
+      <HintPath>$(LongYinMelonNet6Dir)\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TheBookOfLong">
+      <HintPath>$(LongYinModsDir)\TheBookOfLong.dll</HintPath>
+    </Reference>
+    <Reference Include="Tomlet, Version=6.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\Tomlet.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.com.cis.unitycore">
+      <HintPath>$(LongYinGameAssembliesDir)\Unity.com.cis.unitycore.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>$(LongYinGameAssembliesDir)\Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>$(LongYinGameAssembliesDir)\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.AccessibilityModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.AIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.AndroidJNIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.ARModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.CrashReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.DirectorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.DSPGraphModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.GameCenterModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GIModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.GIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.GridModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.HotReloadModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Il2CppAssetBundleManager">
+      <HintPath>$(LongYinMelonNet6Dir)\UnityEngine.Il2CppAssetBundleManager.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Il2CppImageConversionManager">
+      <HintPath>$(LongYinMelonNet6Dir)\UnityEngine.Il2CppImageConversionManager.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.LocalizationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.PerformanceReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ProfilerModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.ProfilerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.ScreenCaptureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.SharedInternalsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.SpriteMaskModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.SpriteShapeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.StreamingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.SubstanceModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.SubsystemsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.TextCoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.TilemapModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.TLSModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsNativeModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UIElementsNativeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UmbraModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UNETModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UNETModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityCurlModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UnityCurlModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.VehiclesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VFXModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.VFXModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.WindModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>$(LongYinGameAssembliesDir)\UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSocketDotNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LongYinMelonNet6Dir)\WebSocketDotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\CsvTable.cs" />
+    <Compile Include="Data\CsvTableDefinition.cs" />
+    <Compile Include="Data\CsvTableLoader.cs" />
+    <Compile Include="Data\CsvTextUtility.cs" />
+    <Compile Include="Mods\ModInfoFile.cs" />
+    <Compile Include="Mods\ModLoadConfigDocument.cs" />
+    <Compile Include="Mods\ModLoadConfigEntry.cs" />
+    <Compile Include="Mods\ModLoadConfigFile.cs" />
+    <Compile Include="Mods\ModLoadConfigService.cs" />
+    <Compile Include="Mods\ModProjectInfo.cs" />
+    <Compile Include="Mods\ModProjectProvider.cs" />
+    <Compile Include="Handlers\CallPlotDataBaseFucHandler.cs" />
+    <Compile Include="Handlers\ChoosePanelHelper.cs" />
+    <Compile Include="Handlers\CommonHandlers.cs" />
+    <Compile Include="Handlers\ConditionQuery\AreaData.cs" />
+    <Compile Include="Handlers\ConditionQuery\ForceData.cs" />
+    <Compile Include="Handlers\ConditionQuery\MissionData.cs" />
+    <Compile Include="Handlers\ConditionQuery\GetFlotVal.cs" />
+    <Compile Include="Handlers\ConditionQuery\GenerateRandomHeroName.cs" />
+    <Compile Include="Handlers\ConditionQuery\FightMatchController.cs" />
+    <Compile Include="Handlers\ConditionQuery\GameController.cs" />
+    <Compile Include="Handlers\ConditionQuery\GlobalData.cs" />
+    <Compile Include="Handlers\ConditionQuery\GetGlobalValue.cs" />
+    <Compile Include="Handlers\ConditionQuery\GetIntVal.cs" />
+    <Compile Include="Handlers\ConditionQuery\GetLastRandomIntVal.cs" />
+    <Compile Include="Handlers\ConditionQuery\HeroData.cs" />
+    <Compile Include="Handlers\ConditionQuery\GetRandomIntVal.cs" />
+    <Compile Include="Handlers\ConditionQuery\GetStrVal.cs" />
+    <Compile Include="Handlers\ConditionQuery\GetSubArg.cs" />
+    <Compile Include="Handlers\ConditionQuery\CheckPlotHappened.cs" />
+    <Compile Include="Handlers\ConditionQuery\GetLoverNeedItemLv.cs" />
+    <Compile Include="Handlers\ConditionQuery\HaveLover.cs" />
+    <Compile Include="Handlers\ConditionQuery\HavePreLover.cs" />
+    <Compile Include="Handlers\ConditionQuery\HaveRelationBetterThanFriend.cs" />
+    <Compile Include="Handlers\ConditionQuery\IsLover.cs" />
+    <Compile Include="Handlers\ConditionQuery\IsLoverOrPreLover.cs" />
+    <Compile Include="Handlers\ConditionQuery\IsPreLover.cs" />
+    <Compile Include="Handlers\ConditionQuery\ItemData.cs" />
+    <Compile Include="Handlers\ConditionQuery\KungfuSkillLvData.cs" />
+    <Compile Include="Handlers\ConditionQuery\NowAbsDay.cs" />
+    <Compile Include="Handlers\ConditionQuery\NowTimeDescribe.cs" />
+    <Compile Include="Handlers\ConditionQuery\Null.cs" />
+    <Compile Include="Handlers\ConditionQuery\PlotController.cs" />
+    <Compile Include="Handlers\ConditionQuery\StrList.cs" />
+    <Compile Include="Handlers\ConditionQuery\Timer.cs" />
+    <Compile Include="Handlers\ConditionQuery\TimerCount.cs" />
+    <Compile Include="Handlers\ConditionQuery\TimerIDByIndex.cs" />
+    <Compile Include="Handlers\ConditionQuery\WorldTime.cs" />
+    <Compile Include="Handlers\ConditionQuery\WorldData.cs" />
+    <Compile Include="Handlers\ConditionQueryHandlers.cs" />
+    <Compile Include="Handlers\CustomValueManager.cs" />
+    <Compile Include="Handlers\HeroInActiveManager.cs" />
+    <Compile Include="Handlers\LoggerManager.cs" />
+    <Compile Include="Handlers\PlotCommandDebugConsole.cs" />
+    <Compile Include="Handlers\PlotCommandHandler.cs" />
+    <Compile Include="Handlers\StringListManager.cs" />
+    <Compile Include="Handlers\SpePlotFuc\AddInfoTab.cs" />
+    <Compile Include="Handlers\SpePlotFuc\AddPlotDataBase.cs" />
+    <Compile Include="Handlers\SpePlotFuc\CallPlotDataBaseFuc.cs" />
+    <Compile Include="Handlers\SpePlotFuc\ChangeFavorByRelation.cs" />
+    <Compile Include="Handlers\SpePlotFuc\GoForwardPlot.cs" />
+    <Compile Include="Handlers\SpePlotFuc\ChangeSpeHeroSkeleton.cs" />
+    <Compile Include="Handlers\SpePlotFuc\CheckPlayerMakeLoverUnhappy.cs" />
+    <Compile Include="Handlers\SpePlotFuc\CheckConditionChangePlotDataBase.cs" />
+    <Compile Include="Handlers\SpePlotFuc\CheckConditionCallFuc.cs" />
+    <Compile Include="Handlers\SpePlotFuc\CheckStringValueChangePlotDataBase.cs" />
+    <Compile Include="Handlers\SpePlotFuc\ChooseHero.cs" />
+    <Compile Include="Handlers\SpePlotFuc\FindHeroRandomItem.cs" />
+    <Compile Include="Handlers\SpePlotFuc\GetBranchMissionByName.cs" />
+    <Compile Include="Handlers\SpePlotFuc\GetBranchMissionBySpeMissionID.cs" />
+    <Compile Include="Handlers\SpePlotFuc\GetMainMissionByName.cs" />
+    <Compile Include="Handlers\SpePlotFuc\GetMainMissionBySpeMissionID.cs" />
+    <Compile Include="Handlers\SpePlotFuc\GetMission.cs" />
+    <Compile Include="Handlers\SpePlotFuc\GenerateNewHero.cs" />
+    <Compile Include="Handlers\SpePlotFuc\GenerateRandomItem.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HaveLoverChangePlotDataBase.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HaveRelationBetterThanFriendChangePlotDataBase.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HaveStringKeyChangePlotDataBase.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HeroGetChosenItem.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HeroGetPlotInteractItem.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HeroGetRandomItem.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HeroDataCallFuc.cs" />
+    <Compile Include="Handlers\SpePlotFuc\ForceDataCallFuc.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HeroEnterArea.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HeroJoinTeam.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HeroLeaveTeam.cs" />
+    <Compile Include="Handlers\SpePlotFuc\QuickFocusOnSelf.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SwapPlayerHero.cs" />
+    <Compile Include="Handlers\SpePlotFuc\HeroLoseItem.cs" />
+    <Compile Include="Handlers\SpePlotFuc\InputHeroAddressForm.cs" />
+    <Compile Include="Handlers\SpePlotFuc\IsLoverChangePlotDataBase.cs" />
+    <Compile Include="Handlers\SpePlotFuc\IsPreLoverChangePlotDataBase.cs" />
+    <Compile Include="Handlers\SpePlotFuc\RemoveTimer.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetGameDifficulty.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetHeroAddressForm.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetHeroInActive.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetHeroRelationShipText.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetGlobalValue.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetSubArg.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetStringValue.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetTargetHero.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetTargetItem.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetTargetMission.cs" />
+    <Compile Include="Handlers\SpePlotFuc\FinishMission.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetTimer.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetTimerWatcher.cs" />
+    <Compile Include="Handlers\SpePlotFuc\ShowChoosePanel.cs" />
+    <Compile Include="Handlers\SpePlotFuc\StartFightMatch.cs" />
+    <Compile Include="Handlers\SpePlotFuc\StartWorking.cs" />
+    <Compile Include="Handlers\SpePlotFuc\ShowTradeUI.cs" />
+    <Compile Include="Handlers\SpePlotFuc\ShowTextInputDialog.cs" />
+    <Compile Include="Handlers\SpePlotFuc\ShowTextOnMouse.cs" />
+    <Compile Include="Handlers\SpePlotFuc\StrListAdd.cs" />
+    <Compile Include="Handlers\SpePlotFuc\StrListClear.cs" />
+    <Compile Include="Handlers\SpePlotFuc\StrListRemove.cs" />
+    <Compile Include="Handlers\SpePlotFuc\StrListSetSep.cs" />
+    <Compile Include="Handlers\SpePlotFucHandlers.cs" />
+    <Compile Include="Handlers\TimerManager.cs" />
+    <Compile Include="UI\ModLoadConfigImguiWindow.cs" />
+    <Compile Include="UI\ModLoadConfigUguiWindow.cs" />
+    <Compile Include="UI\ModLoadConfigUiMode.cs" />
+    <Compile Include="UI\ModLoadConfigWindow.cs" />
+    <Compile Include="UI\ModLoadConfigWindowContext.cs" />
+    <Compile Include="UI\TextInputDialog.cs" />
+    <Compile Include="Patches\AIController\SetAIStuffInActivePatch.cs" />
+    <Compile Include="Patches\AIController\StartMoveToAnotherAreaInActivePatch.cs" />
+    <Compile Include="Patches\EventData\EventDataGetPosTextPatch.cs" />
+    <Compile Include="Patches\GameController\ChangeDayTimerPatch.cs" />
+    <Compile Include="Patches\GameController\GetSkillDataBasePatch.cs" />
+    <Compile Include="Patches\GameController\TimerCacheLifecyclePatch.cs" />
+    <Compile Include="Patches\GameTitleController\TitleModManagerButtonPatch.cs" />
+    <Compile Include="Patches\WorldPlotEventController\WorldPlotEventStartGuardPatch.cs" />
+    <Compile Include="Patches\FightMatchController\EndFightMatchPatch.cs" />
+    <Compile Include="Patches\PlotController\AddPlotDataBasePatch.cs" />
+    <Compile Include="Patches\WorldEventController\CreateWorldEventPatch.cs" />
+    <Compile Include="Patches\PlotController\ChangeNextPlotPatch.cs" />
+    <Compile Include="Patches\CsvPatchApplierCreateBlankRowPatch.cs" />
+    <Compile Include="Patches\LTCSVLoaderReadMultiLinePatch.cs" />
+    <Compile Include="Patches\HeroDetailController\TalkButtonClickedPatch.cs" />
+    <Compile Include="Patches\GameController\GetHeroNamePatch.cs" />
+    <Compile Include="Patches\PlotController\ChangePlotDataBasePatch.cs" />
+    <Compile Include="Patches\PlotInteractControllerOnClickPatch.cs" />
+    <Compile Include="Patches\PlotController\PlotTextShowFinishedPatch.cs" />
+    <Compile Include="Patches\PlotController\ShowSinglePlotTextPatch.cs" />
+    <Compile Include="Patches\SinglePlotChoiceDataCtorPatch.cs" />
+    <Compile Include="Patches\TheBookOfLongTokenDelimitersPatch.cs" />
+    <Compile Include="Patches\GlobalDataReplaceSpeStringPatch.cs" />
+    <Compile Include="Patches\PlotController\SpePlotFucPatch.cs" />
+    <Compile Include="Patches\WorldDataGetHeroPatch.cs" />
+    <Compile Include="Registry\HeroAddressFormRegistry.cs" />
+    <Compile Include="PlotChoiceData\PlotChoiceConditionGroupHelper.cs" />
+    <Compile Include="PlotChoiceData\PlotChoiceMetaDataManager.cs" />
+    <Compile Include="PlotChoiceData\SinglePlotChoiceDataTextProcessor.cs" />
+    <Compile Include="PlotChoiceData\SinglePlotChoiceDataTextValidator.cs" />
+    <Compile Include="Patches\PlotController\GetHeroDataPatch.cs" />
+    <Compile Include="Patches\PlotController\PlotChoiceDataPatch.cs" />
+    <Compile Include="Patches\PlotController\PlotInteractControllerUpdatePatch.cs" />
+    <Compile Include="Patches\SinglePlotDataSetChoiceDataTextsPatch.cs" />
+    <Compile Include="Patches\Trigger\TriggerStartNewGamePatch.cs" />
+    <Compile Include="Patches\Trigger\TriggerStartLoadGamePatch.cs" />
+    <Compile Include="Patches\Trigger\TriggerChangeDayPatch.cs" />
+    <Compile Include="PlotChoiceData\PlotChoicePatchData.cs" />
+    <Compile Include="PlotChoiceData\PlotChoicePatchManager.cs" />
+    <Compile Include="PlotChoiceData\PlotChoiceDataBuilder.cs" />
+    <Compile Include="WorldEventData\WorldEventPatchManager.cs" />
+    <Compile Include="Trigger\TriggerType.cs" />
+    <Compile Include="Trigger\TriggerRule.cs" />
+    <Compile Include="Registry\TriggerRegistry.cs" />
+    <Compile Include="Trigger\TriggerStorageData.cs" />
+    <Compile Include="Trigger\TriggerStateManager.cs" />
+    <Compile Include="Trigger\TriggerExecutor.cs" />
+    <Compile Include="Handlers\SpePlotFuc\SetTriggerEnabled.cs" />
+    <Compile Include="Patches\WorldEventController\PatchManagerStaticCtorPatch.cs" />
+    <Compile Include="Patches\WorldEventController\GameControllerStartWorldEventPatchPatch.cs" />
+    <Compile Include="Patches\WorldEventController\LoadPatchFilesPostfixPatch.cs" />
+    <Compile Include="ModConfig.cs" />
+    <Compile Include="ModMain.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <DeployToMods Include="$(TargetPath)" />
+    <DeployToMods Include="$(TargetDir)$(TargetName).pdb" Condition="Exists('$(TargetDir)$(TargetName).pdb')" />
+  </ItemGroup>
+  <Target Name="DeployModToGameMods" AfterTargets="Build">
+    <MakeDir Directories="$(LongYinModsDir)" />
+    <Copy SourceFiles="@(DeployToMods)" DestinationFolder="$(LongYinModsDir)" SkipUnchangedFiles="true" />
+  </Target>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
+

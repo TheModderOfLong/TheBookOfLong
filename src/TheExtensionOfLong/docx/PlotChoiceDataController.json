@@ -1,0 +1,44 @@
+[
+    {
+        "patchFunction": "AskHeroJoinTeam",
+        "conditionGroup": "[$GetStrVal:自定义选项$][=]1",
+        "insertPos": null,
+        "insertType": {
+            "name": "Before",
+            "value": 1
+        },
+        "overwriteChoiceText": "可以加入我的队伍吗？",
+        "priority": 10,
+        "ChoiceData": {
+            "choiceText": "可以加入我的队伍吗？",
+            "callFuc": "ChangePlotDataBase",
+            "callParam": "110",
+            "inited": false,
+            "inheritMissionRequirement": false,
+            "requirements": [
+                {
+                    "requireType": {
+                        "name": "FavorDegree",
+                        "value": 0
+                    },
+                    "requireNum": 80,
+                    "autoChangeReuqireByDifficulty": false
+                }
+            ],
+            "relations": [],
+            "autoChangeCostByDifficulty": false,
+            "costResource": [
+                {
+                    "resourceType": 1,
+                    "resourceNum": 100
+                }
+            ],
+            "describe": "需要好感度大于80，并消耗100银两",
+            "destroyEvent": false,
+            "playerInteractionTimeNeed": {
+                "name": "ChatTime",
+                "value": 1
+            }
+        }
+    }
+]

@@ -1,0 +1,16 @@
+# V1.0.2
+
+- 【复杂数据补丁】“世界事件”补丁中的startCallPlot支持调用多个函数与参数（需要首个函数关键字为“CALL_ALL_FUC”）。
+- 【查询指令】增加查询类型GameController，查询格式为[$GameController:INFO$]。
+- 【查询指令】对查询类型HeroData增加对于门派、门派掌门、区域等信息的ID和名称的查询。
+
+# V1.0.1
+
+- 修改自定义称呼存储的key，由heroID改为heroName。
+- 修复自定义称呼未成功生效的BUG。
+
+# V1.0.0
+
+- 初始版本发布
+
+

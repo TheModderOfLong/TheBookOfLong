@@ -16,11 +16,11 @@
 
 1. 已安装《龙胤立志传》。
 2. 已安装 MelonLoader。
-3. 已获得或编译出 `TheBookOfLong.dll`。
+3. 已获得或编译出 `TheBookOfLong.dll`、`TheExtensionOfLong.dll`、`TheResourceOfLong.dll`。
 
 安装方式：
 
-1. 将 `TheBookOfLong.dll` 放入游戏目录的 `Mods` 文件夹。
+1. 将 `TheBookOfLong.dll`、`TheExtensionOfLong.dll`、`TheResourceOfLong.dll` 放入游戏目录的 `Mods` 文件夹。
 2. 启动游戏。
 3. 首次启动后，龙之书会自动创建导出目录和数据 Mod 目录。
 
@@ -28,6 +28,8 @@
 
 ```text
 <游戏目录>\Mods\TheBookOfLong.dll
+<游戏目录>\Mods\TheExtensionOfLong.dll
+<游戏目录>\Mods\TheResourceOfLong.dll
 <游戏目录>\Mods\ModsOfLong
 <游戏目录>\DataDump\Latest
 <游戏目录>\UserData\TheBookOfLong.ModLoadConfig.json
@@ -77,4 +79,4 @@ ModsOfLong
 dotnet build D:\codes\LongYin\TheBookOfLong\TheBookOfLong.sln
 ```
 
-构建完成后，项目会自动把 `TheBookOfLong.dll` 和 `TheBookOfLong.pdb` 复制到游戏 `Mods` 目录。
+构建完成后，项目会自动把 `TheBookOfLong.dll`、`TheExtensionOfLong.dll`、`TheResourceOfLong.dll` 及对应的 `.pdb` 文件复制到游戏 `Mods` 目录。
